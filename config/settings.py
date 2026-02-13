@@ -37,6 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'rest_framework',
+    'apps.customers',
+    'apps.loans',
 ]
 
 MIDDLEWARE = [
@@ -72,12 +76,18 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
+# config/settings.py
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'credit_db',      # Must match POSTGRES_DB in docker-compose.yml
+        'USER': 'postgres',       # Must match POSTGRES_USER in docker-compose.yml
+        'PASSWORD': 'password',   # Must match POSTGRES_PASSWORD in docker-compose.yml
+        'HOST': 'db',             # Docker service name for PostgreSQL
     }
 }
+
 
 
 # Password validation
@@ -98,6 +108,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# CELERY SETTINGS
+CELERY_BROKER_URL = 'redis://redis:6379/0' # Assumes docker service name is 'redis'
+CELERY_RESULT_BACKEND = 'redis://redis:6379/0'
 
 # Internationalization
 # https://docs.djangoproject.com/en/6.0/topics/i18n/
