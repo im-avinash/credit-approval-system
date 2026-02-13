@@ -101,7 +101,7 @@ To verify the credit scoring logic and API response integrity, run the automated
 docker-compose exec web python manage.py test
 ```
 ### 📄 Key Business Logic Implemented
-* **Approved Limit** : Calculated as $36 \times \text{monthly\_salary}$ (rounded to the nearest lakh).
+* **Approved Limit** : Calculated as $36 \times \text{monthly\\_salary}$ (rounded to the nearest lakh).
 * **Credit Scoring** : Uses a weighted formula considering past EMI consistency, total loan volume, and recent activity.
 * **Slab-Based Approval** :
   *  **Score > 50** : Approved.
